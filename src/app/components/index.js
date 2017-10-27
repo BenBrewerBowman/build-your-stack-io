@@ -1,2 +1,3 @@
 // exports here
-// i.e. export { default as Component } from './SomeComponent/Component';
+export { default as Header } from './HeaderContainer/Header/Header';
+export { default as Footer } from './FooterContainer/Footer/Footer';
