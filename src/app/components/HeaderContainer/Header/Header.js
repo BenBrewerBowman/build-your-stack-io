@@ -9,16 +9,20 @@ import FontIcon from 'material-ui/FontIcon';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import Menu from 'material-ui/Menu';
 import DropDownMenu from 'material-ui/DropDownMenu';
+import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchBar from 'material-ui-search-bar'
+import Popover from 'material-ui/Popover';
 // icons
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import AccountIcon from 'material-ui/svg-icons/action/account-box';
 import NotificationFalseIcon from 'material-ui/svg-icons/social/notifications-none';
 import NotificationTrueIcon from 'material-ui/svg-icons/social/notifications-active';
+import AddIcon from 'material-ui/svg-icons/content/add';
+import ArrowDropDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
 import './Header.style.css';
 
@@ -79,6 +83,9 @@ class Header extends Component {
     notification: false,
     userName: "BenBrewerBowman",
     dataSource: [],
+    tutorialDropDownOpen: false,
+    accountDropDownOpen: false,
+    addButtonDropDownOpen: false
   };
 
   handleChange = (event, logged) => {
@@ -99,6 +106,44 @@ class Header extends Component {
     });
   };
 
+  handleTouchTapTutorial = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      tutorialDropDownOpen: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleTouchTapAccount = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      accountDropDownOpen: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleTouchTapAddButton = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      addButtonDropDownOpen: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      tutorialDropDownOpen: false,
+      accountDropDownOpen: false,
+      addButtonDropDownOpen: false,
+    });
+  };
+
   render() {
     return (
       <div style={{width: '100%', overflow: 'hidden'}}>
@@ -115,17 +160,31 @@ class Header extends Component {
           </ToolbarGroup>
 
           <ToolbarGroup lastChild={true} style={{margin: 10}}>
-            <div style={{paddingRight: 35}}>Add a Tutorial</div>
-            <div style={{paddingRight: 35}}>Blog</div>
-            <div style={{paddingRight: 35}}>Tags</div>
-            {/* <AutoComplete
-              hintText="Search"
-              // floatingLabelText="Find Tutorials"
-              dataSource={this.state.dataSource}
-              onUpdateInput={this.handleUpdateInput}
-              maxSearchResults={5}
-              // style={{backgroundColor: 'white'}}
-            /> */}
+
+            <div
+              onClick={this.handleTouchTapTutorial}
+              style={{cursor: 'pointer'}}
+            >
+              <span>Tutorials</span>
+            </div>
+            <Popover
+              open={this.state.tutorialDropDownOpen}
+              anchorEl={this.state.anchorEl}
+              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              onRequestClose={this.handleRequestClose}
+            >
+              <Menu >
+                <MenuItem primaryText="Refresh" />
+                <MenuItem primaryText="Help &amp; feedback" />
+                <MenuItem primaryText="Settings" />
+                <MenuItem primaryText="Sign out" />
+              </Menu>
+            </Popover>
+            <ArrowDropDownIcon style={{marginRight: 28, cursor: 'pointer'}}/>
+
+            <div style={{marginRight: 38}}>Tags</div>
+
             <SearchBar
               onChange={this.handleUpdateInput}
               dataSource={this.state.dataSource}
@@ -140,10 +199,26 @@ class Header extends Component {
 
             <ToolbarSeparator style={{margin: 15}}/>
 
+            <AddIcon
+              onClick={this.handleTouchTapAddButton}
+              style={{marginRight: 10, cursor: 'pointer'}}
+            />
+            <Popover
+              open={this.state.addButtonDropDownOpen}
+              anchorEl={this.state.anchorEl}
+              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              onRequestClose={this.handleRequestClose}
+            >
+              <Menu>
+                <MenuItem primaryText="Add a Tutorial" />
+              </Menu>
+            </Popover>
+
             {this.state.logged? <NotificationTrueIcon style={{width: 28,height: 28}}/> : <NotificationFalseIcon />}
-            <div style={{display: "true", paddingRight: 25}}>1</div>
+            <div style={{display: "true", marginRight: 25}}>1</div>
             <div>{this.state.userName}</div>
-            <IconMenu
+            {/* <IconMenu
               iconButtonElement={
                 <IconButton touch={true}>
                   <AccountIcon />
@@ -152,9 +227,29 @@ class Header extends Component {
             >
               <MenuItem primaryText="My Preferences" />
               <MenuItem primaryText="My Favorites" />
+              <Divider />
               <MenuItem primaryText="Sign Out" />
-            </IconMenu>
-{/* {this.state.logged? <div>BenBrewerBowman <AccountIcon style={{color: "white"}}/></div> : "Logged Out"} */}
+            </IconMenu> */}
+
+            <AccountIcon
+              onClick={this.handleTouchTapAccount}
+              style={{marginRight: 10, cursor: 'pointer'}}
+            />
+            <Popover
+              open={this.state.accountDropDownOpen}
+              anchorEl={this.state.anchorEl}
+              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              onRequestClose={this.handleRequestClose}
+            >
+              <Menu>
+                <MenuItem primaryText="My Preferences" />
+                <MenuItem primaryText="My Favorites" />
+                <Divider />
+                <MenuItem primaryText="Sign Out" />
+              </Menu>
+            </Popover>
+
           </ToolbarGroup>
         </Toolbar>
       </div>
