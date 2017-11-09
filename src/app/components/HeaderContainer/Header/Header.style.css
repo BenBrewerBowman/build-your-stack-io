@@ -1,5 +1,14 @@
-IconMenu {
-  display: inline-block;
-  float: left;
-  margin: 16px 32px 16px 0;
+
+.VertMiddle {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.VertMiddle {
+
+}
+
+.AppBar {
+  /*color: black;*/
 }
