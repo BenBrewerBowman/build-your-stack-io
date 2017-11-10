@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import logo from './images/logo.svg';
 import './App.style.css';
 import {
-  Header
+  NavigationBar
 } from '../../index.js';
 
 class App extends Component {
   render() {
     return (
-      <div className="Header">
-        <Header />
+      <div style={{width: "100%"}}>
+        <NavigationBar />
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />

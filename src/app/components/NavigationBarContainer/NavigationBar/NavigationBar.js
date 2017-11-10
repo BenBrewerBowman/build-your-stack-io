@@ -1,37 +1,54 @@
 import React, {Component} from 'react';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
+
 import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
-import FontIcon from 'material-ui/FontIcon';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import Menu from 'material-ui/Menu';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import AutoComplete from 'material-ui/AutoComplete';
 import SearchBar from 'material-ui-search-bar'
 import Popover from 'material-ui/Popover';
 // icons
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import AccountIcon from 'material-ui/svg-icons/action/account-box';
+import AddCircleOutlineIcon from 'material-ui/svg-icons/content/add-circle-outline';
+import AddIcon from 'material-ui/svg-icons/content/add';
+import FontIcon from 'material-ui/FontIcon';
+import HelpOutlineIcon from 'material-ui/svg-icons/action/help-outline';
+import LockOutlineIcon from 'material-ui/svg-icons/action/lock-outline';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NotificationFalseIcon from 'material-ui/svg-icons/social/notifications-none';
 import NotificationTrueIcon from 'material-ui/svg-icons/social/notifications-active';
-import AddIcon from 'material-ui/svg-icons/content/add';
-import ArrowDropDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import PersonOutline from 'material-ui/svg-icons/social/person-outline';
-import HelpOutline from 'material-ui/svg-icons/action/help-outline';
-import LockOutline from 'material-ui/svg-icons/action/lock-outline';
-import Settings from 'material-ui/svg-icons/action/settings';
-import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import StarBorderIcon from 'material-ui/svg-icons/toggle/star-border';
+import PersonOutlineIcon from 'material-ui/svg-icons/social/person-outline';
+//images
+import NavBarLogo from './images/NavBarLogo.png';
 
-import './Header.style.css';
 
+// STYLES
+const navBarStyle = {
+  width: '100%',
+  overflow: 'hidden'
+};
+
+const navBarMarginStyle = {
+  margin: 20
+};
+
+const searchBarStyle = {
+  margin: '0 auto',
+  maxWidth: 800,
+  maxHeight: 42,
+  width: 300
+}
+
+const hoverPointerStyle = {
+  cursor: 'pointer'
+}
 
 class Login extends Component {
   static muiName = 'FlatButton';
@@ -60,30 +77,11 @@ const Logged = (props) => (
 
 Logged.muiName = 'IconMenu';
 
-
-const rightButtons = (loggedState) => {
-
-  return(
-    <div className="VertMiddle">
-
-        {/* <Link href="/"> */}
-            <FlatButton style={{hoverColor: "black"}} label="Search" />
-        {/* </Link> */}
-        {/* <Link href="/Login"> */}
-            <FlatButton label="Notifications" />
-        {/* </Link> */}
-        {/* <Link href="/Login"> */}
-            {loggedState? <Logged /> : <Login />}
-        {/* </Link>  */}
-    </div>
-  );
-};
-
 /**
  * This example is taking advantage of the composability of the `AppBar`
  * to render different components depending on the application state.
  */
-class Header extends Component {
+class NavigationBar extends Component {
   state = {
     logged: false,
     notification: false,
@@ -152,20 +150,21 @@ class Header extends Component {
 
   render() {
     return (
-      <div style={{width: '100%', overflow: 'hidden'}}>
+      <div style={navBarStyle}>
         <Toggle
           label= {this.state.logged ? "Logged In" : "Logged Out"}
           defaultToggled={false}
           onToggle={this.handleChange}
           labelPosition="right"
-          style={{padding: 20}}
         />
         <Toolbar>
-          <ToolbarGroup firstChild={true} style={{margin: 20}}>
-            <ToolbarTitle text="BuildYourStack.io" />
+          <ToolbarGroup firstChild={true} style={navBarMarginStyle}>
+            {/* <ToolbarTitle text="BuildYourStack.io" /> */}
+            <img src={NavBarLogo} />
           </ToolbarGroup>
 
-          <ToolbarGroup lastChild={true} style={{margin: 10}}>
+
+          <ToolbarGroup lastChild={true} style={navBarMarginStyle}>
 
             <div
               onClick={this.handleTouchTapTutorial}
@@ -183,11 +182,13 @@ class Header extends Component {
               <Menu >
                 <MenuItem primaryText="Latest and Greatest" />
                 <MenuItem primaryText="Highest Rated" />
+                <Divider />
+                <MenuItem primaryText="Top Free" />
+                <MenuItem primaryText="Top Paid" />
+                <Divider />
                 <MenuItem primaryText="Beginner" />
                 <MenuItem primaryText="Intermediate" />
                 <MenuItem primaryText="Advanced" />
-                <MenuItem primaryText="Top Free" />
-                <MenuItem primaryText="Top Paid" />
               </Menu>
             </Popover>
             {/* <ArrowDropDownIcon style={{marginRight: 28, cursor: 'pointer'}}/> */}
@@ -199,12 +200,7 @@ class Header extends Component {
               dataSource={this.state.dataSource}
               onRequestSearch={() => console.log('onRequestSearch')}
               maxSearchResults={5}
-              style={{
-                margin: '0 auto',
-                maxWidth: 800,
-                maxHeight: 42,
-                width: 450
-              }}
+              style={searchBarStyle}
             />
 
             <ToolbarSeparator style={{margin: 18}}/>
@@ -221,11 +217,11 @@ class Header extends Component {
               onRequestClose={this.handleRequestClose}
             >
               <Menu>
-                <MenuItem primaryText="Add a Tutorial" rightIcon={<AddCircleOutline/>}/>
+                <MenuItem primaryText="Add a Tutorial" rightIcon={<AddCircleOutlineIcon/>}/>
               </Menu>
             </Popover>
 
-            {this.state.logged? <NotificationTrueIcon style={{cursor: 'pointer'}}/> : <NotificationFalseIcon style={{cursor: 'pointer'}}/>}
+            {this.state.logged? <NotificationTrueIcon style={hoverPointerStyle}/> : <NotificationFalseIcon style={hoverPointerStyle}/>}
             <div style={{display: "true", marginRight: 18}}>1</div>
             <div>{this.state.userName}</div>
             {/* <IconMenu
@@ -243,7 +239,7 @@ class Header extends Component {
 
             <AccountIcon
               onClick={this.handleTouchTapAccount}
-              style={{marginRight: 10, cursor: 'pointer'}}
+              style={hoverPointerStyle}
             />
             <Popover
               open={this.state.accountDropDownOpen}
@@ -253,12 +249,12 @@ class Header extends Component {
               onRequestClose={this.handleRequestClose}
             >
               <Menu>
-                <MenuItem primaryText="My Profile" rightIcon={<PersonOutline/>}/>
-                <MenuItem primaryText="My Favorites" rightIcon={<StarBorder/>} />
-                <MenuItem primaryText="My Preferences" rightIcon={<Settings/>}/>
+                <MenuItem primaryText="My Profile" rightIcon={<PersonOutlineIcon/>}/>
+                <MenuItem primaryText="My Favorites" rightIcon={<StarBorderIcon/>} />
+                <MenuItem primaryText="My Preferences" rightIcon={<SettingsIcon/>}/>
                 <Divider />
-                <MenuItem primaryText="Help" rightIcon={<HelpOutline/>}/>
-                <MenuItem primaryText="Sign Out" rightIcon={<LockOutline/>}/>
+                <MenuItem primaryText="Help" rightIcon={<HelpOutlineIcon/>}/>
+                <MenuItem primaryText="Sign Out" rightIcon={<LockOutlineIcon/>}/>
               </Menu>
             </Popover>
 
@@ -269,4 +265,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default NavigationBar;
