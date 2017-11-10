@@ -7,6 +7,7 @@
     "material-ui-search-bar": "^0.4.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-responsive": "^3.0.0",
     "react-scripts": "1.0.14",
     "styled-components": "^2.2.2"
   },
