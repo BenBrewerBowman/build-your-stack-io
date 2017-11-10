@@ -23,6 +23,12 @@ import NotificationFalseIcon from 'material-ui/svg-icons/social/notifications-no
 import NotificationTrueIcon from 'material-ui/svg-icons/social/notifications-active';
 import AddIcon from 'material-ui/svg-icons/content/add';
 import ArrowDropDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import PersonOutline from 'material-ui/svg-icons/social/person-outline';
+import HelpOutline from 'material-ui/svg-icons/action/help-outline';
+import LockOutline from 'material-ui/svg-icons/action/lock-outline';
+import Settings from 'material-ui/svg-icons/action/settings';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 
 import './Header.style.css';
 
@@ -163,9 +169,9 @@ class Header extends Component {
 
             <div
               onClick={this.handleTouchTapTutorial}
-              style={{cursor: 'pointer'}}
+              style={{cursor: 'pointer', marginRight: 35}}
             >
-              <span>Tutorials</span>
+              <span>Tutorials{(this.state.tutorialDropDownOpen) ? <span style={{fontSize: 10, paddingLeft: 5}}>△</span> : <span style={{fontSize: 10, paddingLeft: 5}}>▽</span>}</span>
             </div>
             <Popover
               open={this.state.tutorialDropDownOpen}
@@ -175,15 +181,18 @@ class Header extends Component {
               onRequestClose={this.handleRequestClose}
             >
               <Menu >
-                <MenuItem primaryText="Refresh" />
-                <MenuItem primaryText="Help &amp; feedback" />
-                <MenuItem primaryText="Settings" />
-                <MenuItem primaryText="Sign out" />
+                <MenuItem primaryText="Latest and Greatest" />
+                <MenuItem primaryText="Highest Rated" />
+                <MenuItem primaryText="Beginner" />
+                <MenuItem primaryText="Intermediate" />
+                <MenuItem primaryText="Advanced" />
+                <MenuItem primaryText="Top Free" />
+                <MenuItem primaryText="Top Paid" />
               </Menu>
             </Popover>
-            <ArrowDropDownIcon style={{marginRight: 28, cursor: 'pointer'}}/>
+            {/* <ArrowDropDownIcon style={{marginRight: 28, cursor: 'pointer'}}/> */}
 
-            <div style={{marginRight: 38}}>Tags</div>
+            <div style={{marginRight: 38, cursor: 'pointer'}}>Tags</div>
 
             <SearchBar
               onChange={this.handleUpdateInput}
@@ -193,11 +202,12 @@ class Header extends Component {
               style={{
                 margin: '0 auto',
                 maxWidth: 800,
-                maxHeight: 42
+                maxHeight: 42,
+                width: 450
               }}
             />
 
-            <ToolbarSeparator style={{margin: 15}}/>
+            <ToolbarSeparator style={{margin: 18}}/>
 
             <AddIcon
               onClick={this.handleTouchTapAddButton}
@@ -211,12 +221,12 @@ class Header extends Component {
               onRequestClose={this.handleRequestClose}
             >
               <Menu>
-                <MenuItem primaryText="Add a Tutorial" />
+                <MenuItem primaryText="Add a Tutorial" rightIcon={<AddCircleOutline/>}/>
               </Menu>
             </Popover>
 
-            {this.state.logged? <NotificationTrueIcon style={{width: 28,height: 28}}/> : <NotificationFalseIcon />}
-            <div style={{display: "true", marginRight: 25}}>1</div>
+            {this.state.logged? <NotificationTrueIcon style={{cursor: 'pointer'}}/> : <NotificationFalseIcon style={{cursor: 'pointer'}}/>}
+            <div style={{display: "true", marginRight: 18}}>1</div>
             <div>{this.state.userName}</div>
             {/* <IconMenu
               iconButtonElement={
@@ -243,10 +253,12 @@ class Header extends Component {
               onRequestClose={this.handleRequestClose}
             >
               <Menu>
-                <MenuItem primaryText="My Preferences" />
-                <MenuItem primaryText="My Favorites" />
+                <MenuItem primaryText="My Profile" rightIcon={<PersonOutline/>}/>
+                <MenuItem primaryText="My Favorites" rightIcon={<StarBorder/>} />
+                <MenuItem primaryText="My Preferences" rightIcon={<Settings/>}/>
                 <Divider />
-                <MenuItem primaryText="Sign Out" />
+                <MenuItem primaryText="Help" rightIcon={<HelpOutline/>}/>
+                <MenuItem primaryText="Sign Out" rightIcon={<LockOutline/>}/>
               </Menu>
             </Popover>
 
