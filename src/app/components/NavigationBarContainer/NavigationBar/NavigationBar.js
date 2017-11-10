@@ -82,10 +82,11 @@ Logged.muiName = 'IconMenu';
  * to render different components depending on the application state.
  */
 class NavigationBar extends Component {
+
   state = {
-    logged: false,
-    notification: false,
-    userName: "BenBrewerBowman",
+    // logged: false,
+    // notification: false,
+    // userName: "BenBrewerBowman",
     dataSource: [],
     tutorialDropDownOpen: false,
     accountDropDownOpen: false,
@@ -151,21 +152,24 @@ class NavigationBar extends Component {
   render() {
     return (
       <div style={navBarStyle}>
+
         <Toggle
-          label= {this.state.logged ? "Logged In" : "Logged Out"}
+          label= {this.props.state.userLoggedIn ? "Logged In" : "Logged Out"}
           defaultToggled={false}
           onToggle={this.handleChange}
           labelPosition="right"
         />
+
         <Toolbar>
+          {/* navbar logo */}
           <ToolbarGroup firstChild={true} style={navBarMarginStyle}>
             {/* <ToolbarTitle text="BuildYourStack.io" /> */}
             <img src={NavBarLogo} />
           </ToolbarGroup>
 
-
           <ToolbarGroup lastChild={true} style={navBarMarginStyle}>
 
+            {/* tutorials dropdown */}
             <div
               onClick={this.handleTouchTapTutorial}
               style={{cursor: 'pointer', marginRight: 35}}
@@ -191,7 +195,6 @@ class NavigationBar extends Component {
                 <MenuItem primaryText="Advanced" />
               </Menu>
             </Popover>
-            {/* <ArrowDropDownIcon style={{marginRight: 28, cursor: 'pointer'}}/> */}
 
             <div style={{marginRight: 38, cursor: 'pointer'}}>Tags</div>
 
@@ -205,6 +208,7 @@ class NavigationBar extends Component {
 
             <ToolbarSeparator style={{margin: 18}}/>
 
+            {/* add tutorial */}
             <AddIcon
               onClick={this.handleTouchTapAddButton}
               style={{marginRight: 10, cursor: 'pointer'}}
@@ -221,22 +225,12 @@ class NavigationBar extends Component {
               </Menu>
             </Popover>
 
-            {this.state.logged? <NotificationTrueIcon style={hoverPointerStyle}/> : <NotificationFalseIcon style={hoverPointerStyle}/>}
-            <div style={{display: "true", marginRight: 18}}>1</div>
-            <div>{this.state.userName}</div>
-            {/* <IconMenu
-              iconButtonElement={
-                <IconButton touch={true}>
-                  <AccountIcon />
-                </IconButton>
-              }
-            >
-              <MenuItem primaryText="My Preferences" />
-              <MenuItem primaryText="My Favorites" />
-              <Divider />
-              <MenuItem primaryText="Sign Out" />
-            </IconMenu> */}
+            {/* notifications */}
+            { (this.props.state.notifications > 0) ? <NotificationTrueIcon style={hoverPointerStyle}/> : <NotificationFalseIcon style={hoverPointerStyle}/>}
+            <div style={{display: "true", marginRight: 18}}>{this.props.state.notifications}</div>
 
+            {/* logged in username and account icon */}
+            <div>{this.props.state.userName}</div>
             <AccountIcon
               onClick={this.handleTouchTapAccount}
               style={hoverPointerStyle}
@@ -257,7 +251,6 @@ class NavigationBar extends Component {
                 <MenuItem primaryText="Sign Out" rightIcon={<LockOutlineIcon/>}/>
               </Menu>
             </Popover>
-
           </ToolbarGroup>
         </Toolbar>
       </div>

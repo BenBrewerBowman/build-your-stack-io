@@ -5,11 +5,22 @@ import {
   NavigationBar
 } from '../../index.js';
 
+
 class App extends Component {
+
+  state = {
+    mobileView: false,
+    tabletView: false,
+    desktopView: true,
+    userLoggedIn: false,
+    userName: "BenBrewerBowman",
+    notifications: 1
+  };
+
   render() {
     return (
       <div style={{width: "100%"}}>
-        <NavigationBar />
+        <NavigationBar state={this.state}/>
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
