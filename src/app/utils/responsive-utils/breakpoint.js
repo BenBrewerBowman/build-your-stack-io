@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
 
 
@@ -8,8 +9,6 @@ const breakpoints = {
   tablet: '(min-width: 768px) and (max-width: 1024px)',
   phone: '(max-width: 767px)',
 };
-
-const { string, object } = React.propTypes;
 
 export default function Breakpoint(props) {
   const breakpoint = breakpoints[props.name] || breakpoints.desktop;
@@ -20,7 +19,7 @@ export default function Breakpoint(props) {
   );
 }
 
-React.propTypes = {
-  name: string,
-  children: object,
+Breakpoint.propTypes = {
+  name: PropTypes.string,
+  children: PropTypes.string,
 }
