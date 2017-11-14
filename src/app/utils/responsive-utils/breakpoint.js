@@ -21,5 +21,5 @@ export default function Breakpoint(props) {
 
 Breakpoint.propTypes = {
   name: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.object,
 }
