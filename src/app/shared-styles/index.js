@@ -1,3 +1,4 @@
 
-export { default as SharedColors } from './SharedColors';
-export { default as SharedFonts } from './SharedColors';
+export { default as Colors } from './Colors';
+export { default as Fonts } from './Fonts';
+export { default as Position } from './Position';

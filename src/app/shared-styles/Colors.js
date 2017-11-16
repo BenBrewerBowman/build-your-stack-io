@@ -1,5 +1,5 @@
 
-const SharedColors = {
+const Colors = {
   logoPurple: '#694EA3',
   logoOrange: '#EA9146',
   logoRed: '#D3000F',
@@ -7,4 +7,4 @@ const SharedColors = {
 
 }
 
-export default SharedColors;
+export default Colors;

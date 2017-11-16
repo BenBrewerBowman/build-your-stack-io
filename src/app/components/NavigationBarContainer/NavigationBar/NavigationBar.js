@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // material-ui
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
-import {Toolbar, ToolbarGroup, ToolbarSeparator} from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import SearchBar from 'material-ui-search-bar'
 import Popover from 'material-ui/Popover';
 // icons
@@ -18,35 +18,49 @@ import NotificationTrueIcon from 'material-ui/svg-icons/social/notifications-act
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import StarBorderIcon from 'material-ui/svg-icons/toggle/star-border';
 import PersonOutlineIcon from 'material-ui/svg-icons/social/person-outline';
-import MoodIcon from 'material-ui/svg-icons/social/mood';
 // images
 import NavBarLogo from './images/NavBarLogo.png';
 // utils
 import DesktopBreakpoint from 'app/utils/responsive-utils/desktop-breakpoint';
+// styles
+import { Colors } from 'app/shared-styles';
 
 
-// STYLES
-const navBarStyle = {
-  width: '100%',
-  overflow: 'hidden'
-};
-const navBarMarginStyle = {
-  margin: 20,
-  float: 'none',
-};
-const searchBarStyle = {
-  margin: '0 auto',
-  maxWidth: 800,
-  maxHeight: 42,
-  width: 300
+// styling
+const colors = {
+  navigationBackgroundColor: Colors.techGrey,
+  navigationPrimaryColor: Colors.logoPurple,
 }
-const hoverPointerStyle = {
-  cursor: 'pointer'
-}
-const vertMiddle = {
-  position: 'relative',
-  top: '50%',
-  transform: 'translateY(-50%)'
+const styles = {
+  navBarContainer: {
+    backgroundColor: colors.navigationBackgroundColor,
+    color: colors.navigationPrimaryColor
+  },
+  navBarGroup: {
+    margin: 20,
+    float: 'none',
+  },
+  dropDownTriangle: {
+    fontSize: 10,
+    paddingLeft: 5
+  },
+  searchBar: {
+    display: "flex",
+    margin: '0 auto',
+    maxHeight: 42,
+  },
+  addIcon: {
+    marginRight: 10,
+    color: colors.navigationPrimaryColor,
+    cursor: 'pointer'
+  },
+  notificationsIcon: {
+    cursor: 'pointer',
+    color: colors.navigationPrimaryColor
+  },
+  accountIcon: {
+    color: colors.navigationPrimaryColor
+  }
 }
 
 
@@ -89,7 +103,7 @@ class ProfileNavElement extends Component {
         {/* account icon and dropdown */}
         <AccountIcon
           onClick={this.handleTouchTapAccount}
-          style={hoverPointerStyle}
+          style={styles.accountIcon}
         />
         <Popover
           open={this.state.accountDropDownOpen}
@@ -166,22 +180,22 @@ class NavigationBar extends Component {
   render() {
     return (
       <DesktopBreakpoint>
-        <div style={navBarStyle}>
+        <div style={styles.navBarContainer}>
           <Toolbar>
             {/* navbar logo */}
-            <ToolbarGroup firstChild={true} style={navBarMarginStyle}>
+            <ToolbarGroup firstChild={true} style={styles.navBarGroup}>
               {/* <ToolbarTitle text="BuildYourStack.io" /> */}
               <img src={NavBarLogo} alt='BuildYourStack.io logo' />
             </ToolbarGroup>
 
-            <ToolbarGroup lastChild={true} style={navBarMarginStyle}>
+            <ToolbarGroup lastChild={true} style={styles.navBarGroup}>
 
               {/* tutorials dropdown */}
               <div
                 onClick={this.handleTouchTapTutorial}
-                style={{cursor: 'pointer', marginRight: 35}}
+                style={{cursor: 'pointer', marginRight: 23}}
               >
-                <span>Tutorials{(this.state.tutorialDropDownOpen) ? <span style={{fontSize: 10, paddingLeft: 5}}>△</span> : <span style={{fontSize: 10, paddingLeft: 5}}>▽</span>}</span>
+                <span>Tutorials{(this.state.tutorialDropDownOpen) ? <span style={styles.dropDownTriangle}>△</span> : <span style={styles.dropDownTriangle}>▽</span>}</span>
               </div>
               <Popover
                 open={this.state.tutorialDropDownOpen}
@@ -203,22 +217,22 @@ class NavigationBar extends Component {
                 </Menu>
               </Popover>
 
-              <div style={{marginRight: 38, cursor: 'pointer'}}>Tags</div>
+              <div style={{marginRight: 28, cursor: 'pointer'}}>Tags</div>
 
               <SearchBar
                 onChange={this.handleUpdateInput}
                 dataSource={this.state.dataSource}
                 onRequestSearch={() => console.log('onRequestSearch')}
                 maxSearchResults={5}
-                style={searchBarStyle}
+                style={styles.searchBar}
               />
 
-              <ToolbarSeparator style={{margin: 18}}/>
+              <ToolbarSeparator style={{margin: 15}}/>
 
               {/* add tutorial */}
               <AddIcon
                 onClick={this.handleTouchTapAddButton}
-                style={{marginRight: 10, cursor: 'pointer'}}
+                style={styles.addIcon}
               />
               <Popover
                 open={this.state.addButtonDropDownOpen}
@@ -233,7 +247,7 @@ class NavigationBar extends Component {
               </Popover>
 
               {/* notifications */}
-              { (this.props.state.notifications > 0) ? <NotificationTrueIcon style={hoverPointerStyle}/> : <NotificationFalseIcon style={hoverPointerStyle}/>}
+              { (this.props.state.notifications > 0) ? <NotificationTrueIcon style={styles.notificationsIcon}/> : <NotificationFalseIcon style={styles.notificationsIcon}/>}
               <div style={{display: "true", marginRight: 18}}>{this.props.state.notifications}</div>
 
               {(this.props.state.userLoggedIn)? <div style={{marginRight: 5}}>{this.props.state.userName}</div> : null}
