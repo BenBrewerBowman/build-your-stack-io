@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
+
 const SvgIcon = (props) => {
   return(
-    <div className={props.className ? props.className : "SvgIcon"}>
+    <div
+      className={props.className ? props.className : "SvgIcon"}
+      style={props.style}
+    >
       <svg
         role="img"
         width={props.width ? props.width : 24}
@@ -22,6 +27,7 @@ const SvgIcon = (props) => {
 
 SvgIcon.propTypes = {
   className: PropTypes.string,
+  style: PropTypes.object,
   width: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -34,5 +40,6 @@ SvgIcon.propTypes = {
   viewBox: PropTypes.string,
   path: PropTypes.string.isRequired
 }
+
 
 export default SvgIcon;
