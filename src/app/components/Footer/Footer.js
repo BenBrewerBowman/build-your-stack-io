@@ -43,7 +43,7 @@ const Footer = () => {
         <div style={styles.footerLinks}>Contact</div>
       </div>
       <div style={styles.tradeMark}>
-        2017 BuildYourStack.io
+        © 2017 BuildYourStack.io
       </div>
     </div>
   );

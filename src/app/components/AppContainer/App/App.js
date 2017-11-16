@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import logo from './images/logo.svg';
+// delete later once Welcome is gone
 import './App.style.css';
 import {
-  NavigationBar
-} from '../../index.js';
+  AboutPage,
+  NavigationBar,
+  Footer
+} from 'app/components/index.js';
+import ControlPanel from './ControlPanel/ControlPanel';
+// images
+import logo from './images/logo.svg';
 
 
 class App extends Component {
@@ -12,7 +17,7 @@ class App extends Component {
     mobileView: false,
     tabletView: false,
     desktopView: true,
-    userLoggedIn: false,
+    userLoggedIn: true,
     userName: "BenBrewerBowman",
     notifications: 1
   };
@@ -20,17 +25,14 @@ class App extends Component {
   render() {
     return (
       <div style={{width: "100%"}}>
+        {/* only use for front end design. Replace with backend control from firebase */}
+        <ControlPanel state={this.state}/>
+        {/* static navigation bar on all pages */}
         <NavigationBar state={this.state}/>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to Scalable-React-Template</h1>
-          </header>
-          <p className="App-intro">
-            Don't worry about defining a new scalable project structure. Let
-            Scalable-React-Template do that for you!
-          </p>
-        </div>
+
+        <AboutPage />
+
+        <Footer />
       </div>
     );
   }
