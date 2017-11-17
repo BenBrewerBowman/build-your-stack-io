@@ -7,9 +7,9 @@ import Breakpoint from './breakpoint';
 // <PhoneBreakpoint>
 //   {object here}
 // </PhoneBreakpoint>
-export default function PhoneBreakpoint(props) {
+export default function MobileBreakpoint(props) {
   return (
-    <Breakpoint name="phone">
+    <Breakpoint name="mobile">
       {props.children}
     </Breakpoint>
   );

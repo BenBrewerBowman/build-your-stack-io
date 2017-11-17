@@ -6,8 +6,10 @@ import MediaQuery from 'react-responsive';
 
 const breakpoints = {
   desktop: '(min-width: 1025px)',
+  tabletAndLarger: '(min-width: 768px)',
   tablet: '(min-width: 768px) and (max-width: 1024px)',
-  phone: '(max-width: 767px)',
+  tabletAndSmaller: '(max-width: 1024px)',
+  mobile: '(max-width: 767px)',
 };
 
 export default function Breakpoint(props) {
