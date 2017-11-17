@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // delete later once Welcome is gone
 import './App.style.css';
 import {
-  AboutPage,
+  AboutView,
   NavigationBar,
   Footer
 } from 'app/components/index.js';
@@ -30,7 +30,7 @@ class App extends Component {
         {/* static navigation bar on all pages */}
         <NavigationBar state={this.state}/>
 
-        <AboutPage />
+        <AboutView />
 
         <Footer />
       </div>
